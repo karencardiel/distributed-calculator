@@ -16,7 +16,7 @@ El sistema consta de:
 - **3 Workers especializados** que procesan tipos específicos de operaciones
 - **Frontend web** para interactuar con el sistema
 
-![Architecture Diagram](https://via.placeholder.com/600x400/7C4585/FFFFFF?text=Coordinator+%E2%86%94+Worker1+%7C+Worker2+%7C+Worker3)
+![Architecture Diagram](https://github.com/user-attachments/assets/aecac4b9-9650-4f2e-9eb4-fda9bb17971f)
 
 ## 🚀 Implementación Paso a Paso
 
