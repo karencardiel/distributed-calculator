@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:mso="urn:schemas-microsoft-com:office:office" xmlns:msdt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Distribuida - Práctica Servidores</title>
+    <link rel="stylesheet" href="styles.css">
+
+
+<!--[if gte mso 9]><xml>
+<mso:CustomDocumentProperties>
+<mso:xd_Signature msdt:dt="string"></mso:xd_Signature>
+<mso:display_urn_x003a_schemas-microsoft-com_x003a_office_x003a_office_x0023_Editor msdt:dt="string">Jorge Javier Pedrozo Romero</mso:display_urn_x003a_schemas-microsoft-com_x003a_office_x003a_office_x0023_Editor>
+<mso:Order msdt:dt="string">3100.00000000000</mso:Order>
+<mso:xd_ProgID msdt:dt="string"></mso:xd_ProgID>
+<mso:_ExtendedDescription msdt:dt="string"></mso:_ExtendedDescription>
+<mso:display_urn_x003a_schemas-microsoft-com_x003a_office_x003a_office_x0023_Author msdt:dt="string">Jorge Javier Pedrozo Romero</mso:display_urn_x003a_schemas-microsoft-com_x003a_office_x003a_office_x0023_Author>
+<mso:ComplianceAssetId msdt:dt="string"></mso:ComplianceAssetId>
+<mso:TemplateUrl msdt:dt="string"></mso:TemplateUrl>
+<mso:ReferenceId msdt:dt="string"></mso:ReferenceId>
+<mso:ContentTypeId msdt:dt="string">0x010100EC43B6B3C3CA474595625ED1B9260377</mso:ContentTypeId>
+<mso:TriggerFlowInfo msdt:dt="string"></mso:TriggerFlowInfo>
+<mso:_SourceUrl msdt:dt="string"></mso:_SourceUrl>
+<mso:_SharedFileIndex msdt:dt="string"></mso:_SharedFileIndex>
+</mso:CustomDocumentProperties>
+</xml><![endif]-->
+</head>
+<body>
+    <h1>Calculadora Distribuida</h1>
+    <p>Sistema con Workers Especializados</p>
+    
+    <h2>Agregar Operaciones</h2>
+    
+    <form id="operationForm">
+        <label>Número A: </label>
+        <input type="number" id="numA" step="any" required>
+        <br><br>
+        
+        <label>Operación: </label>
+        <select id="operation" required>
+            <option value="">Seleccionar...</option>
+            <option value="add">Suma (+)</option>
+            <option value="sub">Resta (-)</option>
+            <option value="mul">Multiplicación (×)</option>
+            <option value="div">División (÷)</option>
+            <option value="pow">Potencia (^)</option>
+            <option value="sqrt">Raíz cuadrada (√)</option>
+        </select>
+        <br><br>
+        
+        <label>Número B: </label>
+        <input type="number" id="numB" step="any" required>
+        <br><br>
+        
+        <button type="submit">Agregar Operación</button>
+    </form>
+    
+    <h2>Lista de Operaciones</h2>
+    <div id="operationsList">
+        <p>No hay operaciones agregadas</p>
+    </div>
+    
+    <button id="calculateBtn" disabled>Calcular Todas las Operaciones</button>
+    <button id="clearBtn">Limpiar Lista</button>
+    
+    <h2>Resultados</h2>
+    <div id="results">
+        <p>Los resultados aparecerán aquí...</p>
+    </div>
+
+    <script>
+        let operations = [];
+        
+        const operationForm = document.getElementById('operationForm');
+        const operationsList = document.getElementById('operationsList');
+        const calculateBtn = document.getElementById('calculateBtn');
+        const clearBtn = document.getElementById('clearBtn');
+        const results = document.getElementById('results');
+        
+        // Agregar operación a la lista
+        operationForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const a = parseFloat(document.getElementById('numA').value);
+            const op = document.getElementById('operation').value;
+            const b = parseFloat(document.getElementById('numB').value);
+            
+            // Para raíz cuadrada, solo usamos el número A
+            if (op === 'root') {
+                operations.push({
+                    op: op,
+                    a: a,
+                    b: 0  // No se usa para raíz cuadrada
+                });
+            } else {
+                operations.push({
+                    op: op,
+                    a: a,
+                    b: b
+                });
+            }
+            
+            updateOperationsList();
+            operationForm.reset();
+        });
+        
+        // Actualizar la lista visual de operaciones
+        function updateOperationsList() {
+            if (operations.length === 0) {
+                operationsList.innerHTML = '<p>No hay operaciones agregadas</p>';
+                calculateBtn.disabled = true;
+                return;
+            }
+            
+            let html = '<h3>Operaciones pendientes:</h3><ul>';
+            operations.forEach((op, index) => {
+                let opSymbol;
+                let display;
+                
+                switch(op.op) {
+                    case 'add': opSymbol = '+'; display = `${op.a} + ${op.b}`; break;
+                    case 'sub': opSymbol = '-'; display = `${op.a} - ${op.b}`; break;
+                    case 'mul': opSymbol = '×'; display = `${op.a} × ${op.b}`; break;
+                    case 'div': opSymbol = '÷'; display = `${op.a} ÷ ${op.b}`; break;
+                    case 'pow': opSymbol = '^'; display = `${op.a} ^ ${op.b}`; break;
+                    case 'sqrt': opSymbol = '√'; display = `√${op.a}`; break;
+                }
+                
+                html += `<li>${index + 1}. ${display} <button onclick="removeOperation(${index})">Eliminar</button></li>`;
+            });
+            html += '</ul>';
+            
+            operationsList.innerHTML = html;
+            calculateBtn.disabled = false;
+        }
+        
+        // Eliminar operación específica
+        function removeOperation(index) {
+            operations.splice(index, 1);
+            updateOperationsList();
+        }
+        
+        // Limpiar todas las operaciones
+        clearBtn.addEventListener('click', function() {
+            operations = [];
+            updateOperationsList();
+            results.innerHTML = '<p>Los resultados aparecerán aquí...</p>';
+        });
+        
+        // Enviar operaciones al coordinador
+        calculateBtn.addEventListener('click', async function() {
+            if (operations.length === 0) return;
+            
+            results.innerHTML = '<p>Procesando operaciones...</p>';
+            
+            try {
+                const response = await fetch('http://localhost:5000/compute', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        operations: operations
+                    })
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`Error HTTP: ${response.status}`);
+                }
+                
+                const resultData = await response.json();
+                displayResults(resultData);
+                
+            } catch (error) {
+                results.innerHTML = `<p style="color: red;">Error: ${error.message}</p>
+                                   <p>Asegúrate de que el coordinador esté ejecutándose en localhost:5000</p>`;
+            }
+        });
+        
+        // Mostrar resultados
+        function displayResults(resultData) {
+            let html = '<h3>Resultados:</h3>';
+            
+            resultData.forEach((result, index) => {
+                const originalOp = operations[index];
+                
+                html += `<div style="border: 1px solid #ccc; margin: 10px 0; padding: 10px;">`;
+                html += `<h4>Operación ${index + 1}</h4>`;
+                
+                if (result.error) {
+                    html += `<p style="color: red;"><strong>Error:</strong> ${result.error}</p>`;
+                } else {
+                    html += `<p><strong>Resultado:</strong> ${result.result}</p>`;
+                }
+                
+                html += `<p><strong>Procesado por:</strong> ${result.processed_by}</p>`;
+                
+                if (result.operation) {
+                    html += `<p><strong>Operación:</strong> ${result.operation}</p>`;
+                }
+                
+                html += '</div>';
+            });
+            
+            results.innerHTML = html;
+        }
+    </script>
+</body>
+</html>

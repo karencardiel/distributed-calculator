@@ -1,0 +1,404 @@
+/* Animación de carga suave para el body */
+body { 
+    font-family: 'Segoe UI', sans-serif; 
+    background-color: #f8f8f8; 
+    margin: 20px; 
+    color: #3D365C;
+    animation: fadeInPage 0.8s ease-in-out;
+}
+
+@keyframes fadeInPage {
+    from { 
+        opacity: 0; 
+        transform: translateY(20px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}
+
+/* Animaciones para títulos */
+h1, h2 { 
+    color: #7C4585;
+    animation: slideInFromLeft 0.6s ease-out;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+h1:hover, h2:hover {
+    color: #C95792;
+    transform: translateX(5px);
+}
+
+@keyframes slideInFromLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Animaciones para contenedores principales */
+form, #results, #operationsList { 
+    background-color: #fff; 
+    padding: 20px; 
+    border-radius: 10px; 
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
+    margin-bottom: 20px;
+    animation: slideInUp 0.7s ease-out;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+form:hover, #results:hover, #operationsList:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Animaciones para labels */
+label { 
+    font-weight: bold;
+    transition: color 0.3s ease;
+    animation: fadeInScale 0.5s ease-out;
+}
+
+label:hover {
+    color: #7C4585;
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Animaciones mejoradas para inputs y selects */
+input, select { 
+    padding: 10px; 
+    border-radius: 8px; 
+    border: 1px solid #ccc; 
+    margin-top: 5px; 
+    margin-bottom: 15px; 
+    width: 100%; 
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+    animation: slideInRight 0.6s ease-out;
+}
+
+input:focus, select:focus {
+    border: 2px solid #7C4585;
+    box-shadow: 0 0 10px rgba(124, 69, 133, 0.3);
+    transform: scale(1.02);
+    outline: none;
+}
+
+input:hover, select:hover {
+    border-color: #C95792;
+    transform: translateY(-1px);
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Animaciones mejoradas para botones */
+button { 
+    background-color: #C95792; 
+    color: white; 
+    padding: 10px 20px; 
+    border: none; 
+    border-radius: 8px; 
+    cursor: pointer; 
+    font-weight: bold; 
+    margin-right: 10px; 
+    transition: all 0.3s ease;
+    animation: bounceIn 0.8s ease-out;
+    position: relative;
+    overflow: hidden;
+}
+
+button:hover { 
+    background-color: #7C4585; 
+    transform: scale(1.05) translateY(-2px);
+    box-shadow: 0 5px 15px rgba(124, 69, 133, 0.4);
+}
+
+button:active {
+    transform: scale(0.98);
+    transition: transform 0.1s ease;
+}
+
+/* Efecto ripple para botones */
+button::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+button:active::after {
+    width: 300px;
+    height: 300px;
+}
+
+@keyframes bounceIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.1);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Animaciones específicas para botones especiales */
+#calculateBtn { 
+    background-color: #F8B55F; 
+    color: #3D365C;
+    animation: pulseGlow 2s infinite;
+}
+
+#calculateBtn:hover { 
+    background-color: #7C4585; 
+    color: #fff;
+    animation: none;
+}
+
+@keyframes pulseGlow {
+    0% {
+        box-shadow: 0 0 5px rgba(248, 181, 95, 0.5);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(248, 181, 95, 0.8);
+    }
+    100% {
+        box-shadow: 0 0 5px rgba(248, 181, 95, 0.5);
+    }
+}
+
+#clearBtn { 
+    background-color: #3D365C; 
+    color: white;
+    animation: slideInFromBottom 0.7s ease-out;
+}
+
+#clearBtn:hover { 
+    background-color: #C95792;
+    transform: scale(1.05) rotate(2deg);
+}
+
+@keyframes slideInFromBottom {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Animaciones para elementos de lista */
+li { 
+    margin-bottom: 10px;
+    animation: slideInList 0.5s ease-out;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+li:hover {
+    background-color: rgba(124, 69, 133, 0.1);
+    transform: translateX(10px);
+}
+
+@keyframes slideInList {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+li button { 
+    background-color: #F8B55F; 
+    color: #3D365C; 
+    padding: 5px 10px; 
+    font-size: 0.9em;
+    transition: all 0.3s ease;
+    animation: fadeInButton 0.6s ease-out;
+}
+
+li button:hover { 
+    background-color: #7C4585; 
+    color: #fff;
+    transform: scale(1.1) rotate(5deg);
+}
+
+@keyframes fadeInButton {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Animaciones mejoradas para tarjetas de resultados */
+.result-card { 
+    border: 2px solid #C95792; 
+    border-left: 10px solid #7C4585; 
+    background-color: #fff0f5; 
+    border-radius: 10px; 
+    padding: 15px; 
+    margin-bottom: 10px; 
+    animation: cardSlideIn 0.6s ease-in-out;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.result-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 8px 25px rgba(201, 87, 146, 0.3);
+    background-color: #fff5f8;
+}
+
+.result-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(124, 69, 133, 0.1), transparent);
+    transform: rotate(45deg);
+    transition: all 0.6s ease;
+    opacity: 0;
+}
+
+.result-card:hover::before {
+    animation: shimmer 1.5s ease-in-out;
+}
+
+@keyframes cardSlideIn { 
+    from { 
+        opacity: 0; 
+        transform: translateY(20px) scale(0.95); 
+    } 
+    to { 
+        opacity: 1; 
+        transform: translateY(0) scale(1); 
+    } 
+}
+
+@keyframes shimmer {
+    0% {
+        opacity: 0;
+        transform: translateX(-100%) translateY(-100%) rotate(45deg);
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(100%) translateY(100%) rotate(45deg);
+    }
+}
+
+/* Animaciones adicionales para elementos que aparecen dinámicamente */
+.fade-in-new {
+    animation: newElementFade 0.5s ease-in-out;
+}
+
+@keyframes newElementFade {
+    from {
+        opacity: 0;
+        transform: translateY(-10px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Animación de eliminación suave */
+.fade-out {
+    animation: fadeOut 0.4s ease-in-out forwards;
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: scale(0.8) translateY(-10px);
+    }
+}
+
+/* Animación de carga/loading */
+.loading {
+    position: relative;
+}
+
+.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid #7C4585;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
