@@ -267,32 +267,6 @@ curl -X POST http://localhost:5000/compute \
 3. Presionar "Calcular Todas las Operaciones"
 4. Ver resultados con información del worker que procesó cada operación
 
-## 🎯 Conceptos Aplicados
-
-### Distributed Processing
-- **Paralelismo:** Múltiples workers procesando simultáneamente
-- **Especialización:** Cada worker optimizado para operaciones específicas
-- **Escalabilidad:** Fácil agregar nuevos workers o tipos de operaciones
-
-### Inter-Service Communication
-- **REST APIs:** Comunicación HTTP entre servicios
-- **JSON:** Formato estándar para intercambio de datos
-- **Error Handling:** Manejo robusto de fallos de comunicación
-
-### Modular Design
-- **Separación de responsabilidades:** Cada componente tiene un rol específico
-- **Extensibilidad:** Arquitectura preparada para futuras mejoras
-- **Mantenibilidad:** Código organizado y fácil de mantener
-
-## 🚀 Extensiones Futuras
-
-Basándose en las sugerencias de la práctica, el sistema está preparado para:
-
-- **Message Queues:** Integración con RabbitMQ o Apache Kafka
-- **Load Balancers:** Distribución de carga entre múltiples instancias
-- **Cloud Deployment:** Despliegue en AWS EC2 o contenedores Docker
-- **Service Discovery:** Registro automático de workers
-- **Monitoring:** Métricas y logs distribuidos
 
 ## 📝 Conclusión
 
@@ -307,7 +281,7 @@ Esta práctica demuestra exitosamente la implementación de un **servidor matem�
 El proyecto proporciona una base sólida para entender conceptos avanzados de sistemas distribuidos y arquitecturas de microservicios.
 
 ---
-**Student:** Karen Cardiel Olea
+**Student:** Karen Cardiel Olea<br>
 **Professor:** M. Sc. Jorge J. Pedrozo Romero  
 **Curso:** Data Engineering - 5° Cuatrimestre  
 **Período:** Mayo - Agosto 2025
